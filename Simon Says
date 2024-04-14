@@ -1,0 +1,25 @@
+const int buttonPins[4] = {4, 5, 6, 7}; // Button pins for each color/sound
+
+void playSimonSays() {
+  lcd.clear();
+  lcd.print("Simon Says:");
+
+  // Generate a random sequence of button presses (replace with your logic)
+  int sequence[10]; // Example sequence array (modify size)
+  for (int i = 0; i < 10; i++) { // Example loop (modify length)
+    sequence[i] = random(4); // Random number between 0-3 (button index)
+  }
+
+  // Show the sequence to the user (replace with LED blinking or sound effects)
+  for (int i = 0; i < 10; i++) { // Example loop (modify length)
+    digitalWrite(buttonPins[sequence[i]], HIGH);
+    delay(500);
+    digitalWrite(buttonPins[sequence[i]], LOW);
+    delay(500);
+  }
+
+  lcd.setCursor(0, 1);
+  lcd.print("Repeat the sequence:");
+
+  // User input and sequence comparison logic (replace with button reading)
+}
