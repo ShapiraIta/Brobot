@@ -1,0 +1,21 @@
+int displayedNumber, userNumber;
+
+void playNumberMemory() {
+  lcd.clear();
+  displayedNumber = random(1000); // Generate a random number
+  lcd.print(displayedNumber);
+  delay(2000); // Display the number for a short duration
+
+  lcd.clear();
+  lcd.print("Enter the number:");
+
+  while (!Serial.available()); // Wait for user input
+  userNumber = Serial.parseInt();
+
+  lcd.clear();
+  if (displayedNumber == userNumber) {
+    lcd.print("You remembered it!");
+  } else {
+    lcd.print("Try again!");
+  }
+}
