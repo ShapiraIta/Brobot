@@ -1,0 +1,66 @@
+#include <LiquidCrystal.h>
+
+const int button1Pin = 2;  // Replace with your button 1 pin
+const int button2Pin = 3;  // Replace with your button 2 pin
+const int ledPin = 13;    // Replace with your LED pin (optional)
+
+LiquidCrystal lcd(0, 1, 2, 3, 4, 5); // I2C LCD connections (modify if using standard connections)
+
+int currentGame = 0;  // Stores the current game selection (0 or 1)
+
+void setup() {
+  pinMode(button1Pin, INPUT_PULLUP);
+  pinMode(button2Pin, INPUT_PULLUP);
+  pinMode(ledPin, OUTPUT);  // Set LED pin as output (optional)
+
+  lcd.begin(16, 2);
+  lcd.clear();
+  lcd.print("Select a Game:");
+}
+
+void loop() {
+  int button1State = digitalRead(button1Pin);
+  int button2State = digitalRead(button2Pin);
+
+  // Handle game selection buttons
+  if (button1State == LOW) {
+    currentGame = 0;
+    displayGameSelection();
+  } else if (button2State == LOW) {
+    currentGame = 1;
+    displayGameSelection();
+  }
+
+  // Handle game logic based on currentGame
+  if (currentGame == 0) {
+    playGuessingGame();
+  } else if (currentGame == 1) {
+    playMemoryGame();
+  }
+}
+
+void displayGameSelection() {
+  lcd.clear();
+  if (currentGame == 0) {
+    lcd.print("Guessing Game");
+  } else {
+    lcd.print("Memory Game");
+  }
+  lcd.setCursor(0, 1);
+  lcd.print("Press other button");
+}
+
+void playGuessingGame() {
+  lcd.clear();
+  lcd.print("Guess a number:");
+  lcd.setCursor(0, 1);
+  // Implement logic to generate a random number and compare user input (requires additional libraries)
+  // Display feedback using LED (optional)
+}
+
+void playMemoryGame() {
+  lcd.clear();
+  lcd.print("Memory Game!");
+  // Implement logic for displaying a sequence and user recall (requires additional libraries)
+  // Display feedback using LED (optional)
+}
